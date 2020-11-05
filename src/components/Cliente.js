@@ -24,21 +24,13 @@ height: 10vh;
 
 
 class Cliente extends React.Component {
-
-
-
   render() {
     return (
     <ClienteContainer>
-  
-
-     
-
         <ContainerPrincipal>
             <Filtros />
-            <Produtos />
+            <Produtos produtos={this.props.produtos} />
             <Carrinho />
-         
         </ContainerPrincipal>
         <Footer />
     </ClienteContainer>

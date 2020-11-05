@@ -21,8 +21,21 @@ margin:auto;
 
 class App extends React.Component {
 	state = {
-  pagina: true
- 	}
+  pagina: true,
+  produtos:[]
+	 }
+	 
+    componentDidMount=()=>{
+		this.pegarProdutos()
+	  }
+  
+	  pegarProdutos = () =>{
+		 axios.get('https://us-central1-labenu-apis.cloudfunctions.net/fourUsedOne/products').then((resposta) =>{
+		   this.setState({produtos:resposta.data.products})
+		   console.log(this.state.produtos)
+		 })
+	  } 
+    
 	 
      mudarPagina=()=>{
 		 this.setState({pagina:!this.state.pagina})
@@ -30,12 +43,11 @@ class App extends React.Component {
 
 	render() {
 
-		const pagina = this.state.pagina ?  <Cliente/> : <Vendedor/>
+		const pagina = this.state.pagina ?  <Cliente produtos={this.state.produtos}/> : <Vendedor/>
 		return (
 			<div>
 				 <Header> 
         <p>Logo</p>
-
         <div>
         <Input></Input>
         <button>Pesquisar</button>
