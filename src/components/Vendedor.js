@@ -1,13 +1,14 @@
-import React from 'react'
-import styled from 'styled-components'
- 
+import React from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
+
 const Pag = styled.div`
 `
 
 const Inputs = styled.div`
-width:20vw;
-margin:auto;
-margin-top:3vh;
+  width:20vw;
+  margin:auto;
+  margin-top:3vh;
 `
 
 class Vendedor extends React.Component {
@@ -17,8 +18,28 @@ class Vendedor extends React.Component {
     inputPreco: "",
     selectCategoria: "",
     selectFormaDePagamento: "",
-    inputFoto: "",
+    inputFoto: [],
     selectParcelamento: ""
+  }
+
+  cadastrarProduto = () => {
+    const body = {
+      name: this.state.inputNome,
+      description: this.state.inputDescricao,
+      price: this.state.inputPreco,
+      paymentMethod: this.state.selectFormaDePagamento,
+      category: this.state.selectCategoria,
+      photos: this.state.inputFoto,
+      installments: this.state.selectParcelamento
+    }
+    
+    axios.post('https://us-central1-labenu-apis.cloudfunctions.net/fourUsedOne/products', body
+    ).then((response) => {
+
+      alert("Anúncio cadastrado.")
+    }).catch((error) => {
+      console.log(error.message)
+    })
   }
 
   onChangeInputNome = (event) => {
@@ -50,6 +71,7 @@ class Vendedor extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <Pag>
       <Inputs>
@@ -103,6 +125,7 @@ class Vendedor extends React.Component {
         <option value="12"> 12 </option>
       </select>
       </Inputs>
+      <button onClick={this.cadastrarProduto}> Cadastrar </button>
         
        </Pag>  
     )
