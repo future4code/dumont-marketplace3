@@ -13,39 +13,24 @@ display: flex;
 flex-direction: row;
 
 `
-const Header = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-padding: 0 50px 0 50px;
-border:solid;
-`
+
 const Footer = styled.div`
 border: solid pink;
 height: 10vh;
 `
 
-const Input = styled.input`
-width:500px;
-height:10px;
-margin:auto;
-`
+
+
+
 
 class Cliente extends React.Component {
+
+
+
   render() {
     return (
     <ClienteContainer>
-        <Header> 
-        <p>Logo</p>
-
-        <div>
-        <Input></Input>
-        <button>Pesquisar</button>
-        </div>
-
-
-        <button> 4Used Vendas</button>
-        </Header>
+  
 
      
 
