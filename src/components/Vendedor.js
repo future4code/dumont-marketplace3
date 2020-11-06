@@ -63,7 +63,7 @@ class Vendedor extends React.Component {
   }
 
   onChangeInputFoto = (event) => {
-    this.setState({inputFoto: event.target.value})
+    this.setState({inputFoto: [event.target.value]})
   }
 
   onChangeSelectParcelamento = (event) => {
