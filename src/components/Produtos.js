@@ -42,11 +42,17 @@ class Produtos extends React.Component {
                      .sort((a, b) => {
                             switch(this.state.sort){
                                    case "crescente": 
-                                          return (a.price > b.price)
+                                          return (a.price - b.price)
                                    case "decrescente":
-                                          return(b.price > a.price)
+                                          return(b.price - a.price)
                                    case "nome":
-                                          return(a.name.toLowerCase() > b.name.toLowerCase())
+                                          if (a.name.toLowerCase() > b.name.toLowerCase()) {
+                                                 return 1
+                                               }
+                                               if (a.name.toLowerCase() < b.name.toLowerCase()) {
+                                                 return -1
+                                               }
+                                                 return 0
                             }
                      })
        }
