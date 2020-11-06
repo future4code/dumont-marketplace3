@@ -28,7 +28,12 @@ class Cliente extends React.Component {
     return (
     <ClienteContainer>
         <ContainerPrincipal>
-            <Filtros />
+            <Filtros 
+            onChangeValorMaximo={this.props.onChangeValorMaximo}
+		        onChangeValorMinimo={this.props.onChangeValorMinimo}
+		        onChangeCategoria={this.props.onChangeCategoria}
+		        valorMaximo={this.props.valorMaximo}
+		        valorMinimo={this.props.valorMinimo}/>
             <Produtos produtos={this.props.produtos} />
             <Carrinho />
         </ContainerPrincipal>

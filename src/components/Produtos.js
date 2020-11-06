@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios'
+import Carrinho from './Carrinho';
 
 const ProdutosContainer = styled.div`
 display:grid;
@@ -27,18 +28,34 @@ margin-bottom:3px;
 
 
 class Produtos extends React.Component {
-    
+
+
+    state={
+        carrinho:[]
+    }
+
+    adicionarLista=(produto)=>{
+    this.setState({carrinho:produto})
+    }
+    pegarProdutosFiltrados=()=>{
+    return this.props.produtos
+    .filter((produto)=>produto.price<=this.props.valorMaximo)
+    .filter((produto)=>produto.price>=this.props.valorMinimo)
+
+}
 
 
     render() { 
-         
+         const produtosFiltrados = this.pegarProdutosFiltrados()
          const produtosRenderizados = this.props.produtos.map((produto) =>{
-          return<CartaoProduto>
+          return<CartaoProduto key={produto.id}>
                  <p>{produto.name}</p>
                  <Imagem src={produto.photos}></Imagem>
                  <p>preço: R${produto.price}</p>
                  <p>{produto.paymentMethod}</p>
-                  <Botao>Comprar</Botao>
+                  <Botao 
+                  onClick={()=>this.adicionarLista(produto)}
+                  >Comprar</Botao>
                  </CartaoProduto>
          })
 

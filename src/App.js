@@ -22,8 +22,11 @@ margin:auto;
 class App extends React.Component {
 	state = {
   pagina: true,
-  produtos:[]
-	 }
+  produtos:[],
+  valorMaximo: "",
+  valorMinimo: "",
+  categoria: ""
+	}
 	 
     componentDidMount=()=>{
 		this.pegarProdutos()
@@ -32,7 +35,7 @@ class App extends React.Component {
 	  pegarProdutos = () =>{
 		 axios.get('https://us-central1-labenu-apis.cloudfunctions.net/fourUsedOne/products').then((resposta) =>{
 		   this.setState({produtos:resposta.data.products})
-		   console.log(this.state.produtos)
+	
 		 })
 	  } 
     
@@ -40,10 +43,25 @@ class App extends React.Component {
      mudarPagina=()=>{
 		 this.setState({pagina:!this.state.pagina})
 	 }
+	 onChangeValorMaximo = (event) => {
+		this.setState({valorMaximo: event.target.value})
+	}   
+	 onChangeValorMinimo = (event) => {
+        this.setState({valorMinimo: event.target.value})
+	} 
+	   onChangeCategoria = (event) => {
+        this.setState({categoria: event.target.value})
+    }
 
 	render() {
-
-		const pagina = this.state.pagina ?  <Cliente produtos={this.state.produtos}/> : <Vendedor/>
+		const pagina = this.state.pagina ?  <Cliente 
+		produtos={this.state.produtos}
+		onChangeValorMaximo={this.onChangeValorMaximo}
+		onChangeValorMinimo={this.onChangeValorMinimo}
+		onChangeCategoria={this.onChangeCategoria}
+		valorMaximo={this.state.valorMaximo}
+		valorMinimo={this.state.valorMinimo}
+		/> : <Vendedor/>
 		return (
 			<div>
 				 <Header> 

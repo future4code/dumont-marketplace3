@@ -14,12 +14,13 @@ render() {
     return <FiltrosContainer>
         <p>Filtros</p>
         <p>Filtrar por valor minimo</p>
-        <input></input>
+        <input type='number' onChange={this.props.onChangeValorMinimo} value={this.props.valorMinimo}></input>
         <p>Filtrar por valor maximo</p>
-        <input></input>
+        <input type='number' onChange={this.props.onChangeValorMaximo} value={this.props.valorMaximo}></input>
         <br/>
-        <select>
-            <option>Categoria</option>
+        <p>Filtrar por categoria</p>
+        <select onChange={this.props.onChangeCategoria}>
+            <option></option>
             <option>carro</option>
             <option>Roupas</option>
             <option>outros</option>
