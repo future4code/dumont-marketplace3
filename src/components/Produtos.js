@@ -25,25 +25,37 @@ const Botao = styled.button`
 margin-bottom:3px;
 `
 
-
-
 class Produtos extends React.Component {
-
-
-    state={
-        carrinho:[]
+     state = {
+              sort:"",
+              carrinho:[]
     }
 
     adicionarLista=(produto)=>{
     this.setState({carrinho:produto})
     }
-    pegarProdutosFiltrados=()=>{
-    return this.props.produtos
-    .filter((produto)=>produto.price<=this.props.valorMaximo)
-    .filter((produto)=>produto.price>=this.props.valorMinimo)
 
-}
+       pegarProdutosFiltrados = () => {
+              return this.props.produtos
+                     .filter((produto) => produto.price < (this.props.valorMaximo || Infinity))
+                     .filter((produto) => produto.price > this.props.valorMinimo)
+                     .filter((produto) => (produto.name.toLowerCase().includes(this.props.valorPesquisa.toLowerCase()) || (produto.description.toLowerCase().includes(this.props.valorPesquisa.toLowerCase()))))
+                     .filter((produto) => produto.category.includes(this.props.categoria))
+                     .sort((a, b) => {
+                            switch(this.state.sort){
+                                   case "crescente": 
+                                          return (a.price > b.price)
+                                   case "decrescente":
+                                          return(b.price > a.price)
+                                   case "nome":
+                                          return(a.name.toLowerCase() > b.name.toLowerCase())
+                            }
+                     })
+       }
 
+       onChangeOrdenacao = (event) => {
+              this.setState({sort: event.target.value})
+       }
 
     render() { 
          const produtosFiltrados = this.pegarProdutosFiltrados()
@@ -59,11 +71,21 @@ class Produtos extends React.Component {
                  </CartaoProduto>
          })
 
-    return <ProdutosContainer>
-           {produtosRenderizados}
-           </ProdutosContainer>
 
-    }}
 
+       return <div>
+              <select onChange={this.onChangeOrdenacao}>
+                     <option value="">Ordene Por:</option>
+                     <option value="crescente">Crescente</option>
+                     <option value="decrescente">Decrescente</option>
+                     <option value="nome">Nome</option>
+              </select>
+              <ProdutosContainer>
+              {produtosRenderizados}
+              </ProdutosContainer>
+       </div>
+
+       }
+}
 
 export default Produtos;
