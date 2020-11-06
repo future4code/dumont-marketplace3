@@ -15,11 +15,11 @@ class Vendedor extends React.Component {
   state = {
     inputNome: "",
     inputDescricao: "",
-    inputPreco: "",
-    selectCategoria: "",
-    selectFormaDePagamento: "",
+    inputPreco: 0,
+    selectFormaDePagamento: "billet",
+    selectCategoria: "audio",
     inputFoto: [],
-    selectParcelamento: ""
+    selectParcelamento: 1 
   }
 
   cadastrarProduto = () => {
@@ -39,6 +39,7 @@ class Vendedor extends React.Component {
       alert("Anúncio cadastrado.")
     }).catch((error) => {
       console.log(error.message)
+      console.log(body)
     })
   }
 
@@ -63,7 +64,7 @@ class Vendedor extends React.Component {
   }
 
   onChangeInputFoto = (event) => {
-    this.setState({inputFoto: event.target.value})
+    this.setState({inputFoto: [event.target.value]})
   }
 
   onChangeSelectParcelamento = (event) => {
