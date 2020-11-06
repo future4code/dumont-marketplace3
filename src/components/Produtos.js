@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios'
-import Carrinho from './Carrinho';
 
 const ProdutosContainer = styled.div`
 display:grid;
@@ -58,6 +56,7 @@ class Produtos extends React.Component {
        }
 
     render() { 
+           console.log(this.state.sort)
          const produtosRenderizados = this.pegarProdutosFiltrados().map((produto) =>{
           return<CartaoProduto key={produto.id}>
                  <p>{produto.name}</p>
