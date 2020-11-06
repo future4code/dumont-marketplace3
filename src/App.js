@@ -77,6 +77,7 @@ class App extends React.Component {
 												valorPesquisa={this.state.valorPesquisa}
 												/> 
 												: <Vendedor/>
+
 		return (
 			<div>
 			<Header> 

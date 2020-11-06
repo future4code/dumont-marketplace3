@@ -9,7 +9,6 @@ margin: 1vw;
 `
 
 class Filtros extends React.Component {
-
     render() {
         return <FiltrosContainer>
             <p>Filtros</p>

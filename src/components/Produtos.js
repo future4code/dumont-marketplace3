@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios'
+import Carrinho from './Carrinho';
 
 const ProdutosContainer = styled.div`
 display:grid;
@@ -25,9 +26,14 @@ margin-bottom:3px;
 `
 
 class Produtos extends React.Component {
-       state = {
-              sort:""
-       }
+     state = {
+              sort:"",
+              carrinho:[]
+    }
+
+    adicionarLista=(produto)=>{
+    this.setState({carrinho:produto})
+    }
 
        pegarProdutosFiltrados = () => {
               return this.props.produtos
@@ -51,16 +57,20 @@ class Produtos extends React.Component {
               this.setState({sort: event.target.value})
        }
 
-       render() { 
-              const produtosRenderizados = this.pegarProdutosFiltrados().map((produto) =>{
-                     return<CartaoProduto key={produto.id}>
-                            <p>{produto.name}</p>
-                            <Imagem src={produto.photos}></Imagem>
-                            <p>preço: R${produto.price}</p>
-                            <p>{produto.paymentMethod}</p>
-                             <Botao>Comprar</Botao>
-                     </CartaoProduto>
-              })
+    render() { 
+         const produtosFiltrados = this.pegarProdutosFiltrados()
+         const produtosRenderizados = this.props.produtos.map((produto) =>{
+          return<CartaoProduto key={produto.id}>
+                 <p>{produto.name}</p>
+                 <Imagem src={produto.photos}></Imagem>
+                 <p>preço: R${produto.price}</p>
+                 <p>{produto.paymentMethod}</p>
+                  <Botao 
+                  onClick={()=>this.adicionarLista(produto)}
+                  >Comprar</Botao>
+                 </CartaoProduto>
+         })
+
 
 
        return <div>
