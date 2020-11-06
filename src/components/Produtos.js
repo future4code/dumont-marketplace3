@@ -58,7 +58,6 @@ class Produtos extends React.Component {
        }
 
     render() { 
-         const produtosFiltrados = this.pegarProdutosFiltrados()
          const produtosRenderizados = this.pegarProdutosFiltrados().map((produto) =>{
           return<CartaoProduto key={produto.id}>
                  <p>{produto.name}</p>
