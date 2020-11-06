@@ -29,9 +29,7 @@ class Produtos extends React.Component {
               carrinho:[]
     }
 
-    adicionarLista=(produto)=>{
-    this.setState({carrinho:produto})
-    }
+    
 
        pegarProdutosFiltrados = () => {
               return this.props.produtos
@@ -70,7 +68,7 @@ class Produtos extends React.Component {
                  <p>preço: R${produto.price}</p>
                  <p>{produto.paymentMethod}</p>
                   <Botao 
-                  onClick={()=>this.adicionarLista(produto)}
+                  onClick={()=>this.adicionarCarrinho(produto)}
                   >Comprar</Botao>
                  </CartaoProduto>
          })
