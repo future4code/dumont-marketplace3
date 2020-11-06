@@ -24,29 +24,58 @@ const Botao = styled.button`
 margin-bottom:3px;
 `
 
-
-
 class Produtos extends React.Component {
-    
+       state = {
+              sort:""
+       }
+
+       pegarProdutosFiltrados = () => {
+              return this.props.produtos
+                     .filter((produto) => produto.price < (this.props.valorMaximo || Infinity))
+                     .filter((produto) => produto.price > this.props.valorMinimo)
+                     .filter((produto) => (produto.name.toLowerCase().includes(this.props.valorPesquisa.toLowerCase()) || (produto.description.toLowerCase().includes(this.props.valorPesquisa.toLowerCase()))))
+                     .filter((produto) => produto.category.includes(this.props.categoria))
+                     .sort((a, b) => {
+                            switch(this.state.sort){
+                                   case "crescente": 
+                                          return (a.price > b.price)
+                                   case "decrescente":
+                                          return(b.price > a.price)
+                                   case "nome":
+                                          return(a.name.toLowerCase() > b.name.toLowerCase())
+                            }
+                     })
+       }
+
+       onChangeOrdenacao = (event) => {
+              this.setState({sort: event.target.value})
+       }
+
+       render() { 
+              const produtosRenderizados = this.pegarProdutosFiltrados().map((produto) =>{
+                     return<CartaoProduto key={produto.id}>
+                            <p>{produto.name}</p>
+                            <Imagem src={produto.photos}></Imagem>
+                            <p>preço: R${produto.price}</p>
+                            <p>{produto.paymentMethod}</p>
+                             <Botao>Comprar</Botao>
+                     </CartaoProduto>
+              })
 
 
-    render() { 
-         
-         const produtosRenderizados = this.props.produtos.map((produto) =>{
-          return<CartaoProduto>
-                 <p>{produto.name}</p>
-                 <Imagem src={produto.photos}></Imagem>
-                 <p>preço: R${produto.price}</p>
-                 <p>{produto.paymentMethod}</p>
-                  <Botao>Comprar</Botao>
-                 </CartaoProduto>
-         })
+       return <div>
+              <select onChange={this.onChangeOrdenacao}>
+                     <option value="">Ordene Por:</option>
+                     <option value="crescente">Crescente</option>
+                     <option value="decrescente">Decrescente</option>
+                     <option value="nome">Nome</option>
+              </select>
+              <ProdutosContainer>
+              {produtosRenderizados}
+              </ProdutosContainer>
+       </div>
 
-    return <ProdutosContainer>
-           {produtosRenderizados}
-           </ProdutosContainer>
-
-    }}
-
+       }
+}
 
 export default Produtos;
