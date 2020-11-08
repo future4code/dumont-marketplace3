@@ -34,6 +34,7 @@ border: lightgray;
 const Procurar = styled.button`
 border: none;
 padding: 3px 20px;
+cursor: pointer;
 `
 const Footer = styled.div`
 display: flex;
@@ -50,6 +51,9 @@ text-align: center;
 const Descricao = styled.p`
 text-align: justify;
 max-width: 500px;
+`
+const Botao = styled.button`
+cursor: pointer;
 `
 
 let inputPesquisa = ""
@@ -123,8 +127,8 @@ class App extends React.Component {
           </Procurar>
 				</ContainerPesquisar>}
         {this.state.pagina ? 
-        <button onClick={this.mudarPagina}> 4Used Vendas</button> :
-        <button onClick={this.mudarPagina}> 4Used Clientes</button>}
+        <Botao onClick={this.mudarPagina}> 4Used Vendas</Botao> :
+        <Botao onClick={this.mudarPagina}> 4Used Clientes</Botao>}
 			</Header>
 			{pagina}
       <Footer>

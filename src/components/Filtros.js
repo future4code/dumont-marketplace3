@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const FiltrosContainer = styled.div`
-border: solid blue;
+border: solid grey;
 width: 12vw;
 height: 50vw;
 margin: 1vw;
+padding: 1vw;
 `
 const InputFiltros = styled.input`
 width: 80%;

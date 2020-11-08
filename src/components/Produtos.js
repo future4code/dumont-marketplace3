@@ -4,12 +4,11 @@ import styled from 'styled-components';
 const ProdutosContainer = styled.div`
 display:grid;
 grid-template-columns:1fr 1fr 1fr;
-border: solid yellow;
 width: 60vw;
 margin:1vw;
 `
 const CartaoProduto = styled.div`
-border: solid red;
+border: solid lightgray;
 width: 15vw;
 text-align: center;
 margin:1vw; 
@@ -20,6 +19,7 @@ height:100px;
 `
 const Botao = styled.button`
 margin-bottom:3px;
+cursor: pointer;
 `
 
 class Produtos extends React.Component {
