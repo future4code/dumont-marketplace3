@@ -10,6 +10,10 @@ const Inputs = styled.div`
   margin:auto;
   margin-top:3vh;
 `
+const Botao = styled.button`
+margin: 10px;
+cursor: pointer;
+`
 
 class Vendedor extends React.Component {
   state = {
@@ -124,8 +128,10 @@ class Vendedor extends React.Component {
         <option value="11"> 11 </option>
         <option value="12"> 12 </option>
       </select>
+      <br/>
+      <Botao onClick={this.cadastrarProduto}> Cadastrar </Botao>
       </Inputs>
-      <button onClick={this.cadastrarProduto}> Cadastrar </button>
+     
         
        </Pag>  
     )

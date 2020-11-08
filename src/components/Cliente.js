@@ -48,6 +48,8 @@ class Cliente extends React.Component {
           quantity: produto.quantity - 1
         }
         return novoProduto
+      } else {
+        return produto
       }
     }).filter((produto) => produto.quantity > 0)
     this.setState({carrinho: novoCarrinho})
