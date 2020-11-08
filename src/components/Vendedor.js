@@ -72,7 +72,6 @@ class Vendedor extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <Pag>
       <Inputs>

@@ -5,18 +5,51 @@ import Carrinho from './components/Carrinho';
 import Produtos from './components/Produtos';
 import axios from 'axios'
 import styled from 'styled-components'
+import Logo from './assets/images/4used-logo.svg'
+import Lupa from './assets/images/LUPA.svg'
+import RedesSociais from './assets/images/RedesSociais.svg'
+import DownloadApp from './assets/images/DownloadApp.svg'
 
 const Header = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-padding: 0 50px 0 50px;
-border:solid;
+align-items: center;
+padding: 20px 50px;
+background-color: #43ADA5;
+`
+const ContainerPesquisar = styled.div`
+display: flex;
+border: solid 1px lightgray;
+border-radius: 5px;
+align-items: center;
+background-color: white;
 `
 const Input = styled.input`
 width:500px;
 height:10px;
-margin:auto;
+margin: auto;
+border: lightgray;
+`
+const Procurar = styled.button`
+border: none;
+padding: 3px 20px;
+`
+const Footer = styled.div`
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px 50px;
+background-color: #43434F;
+color: white;
+`
+const Lema = styled.h1`
+font-size: 40px;
+text-align: center;
+`
+const Descricao = styled.p`
+text-align: justify;
+max-width: 500px;
 `
 
 let inputPesquisa = ""
@@ -67,29 +100,50 @@ class App extends React.Component {
 
 	render() {
 		const pagina = this.state.pagina ?  <Cliente 
-												produtos={this.state.produtos}
-												onChangeValorMaximo={this.onChangeValorMaximo}
-												onChangeValorMinimo={this.onChangeValorMinimo}
-												onChangeValorCategoria={this.onChangeValorCategoria}
-												valorMaximo={this.state.valorMaximo}
-												valorMinimo={this.state.valorMinimo}
-												categoria={this.state.categoria}
-												valorPesquisa={this.state.valorPesquisa}
-												/> 
-												: <Vendedor/>
+                                            produtos={this.state.produtos}
+                                            onChangeValorMaximo={this.onChangeValorMaximo}
+                                            onChangeValorMinimo={this.onChangeValorMinimo}
+                                            onChangeValorCategoria={this.onChangeValorCategoria}
+                                            valorMaximo={this.state.valorMaximo}
+                                            valorMinimo={this.state.valorMinimo}
+                                            categoria={this.state.categoria}
+                                            valorPesquisa={this.state.valorPesquisa}
+                                            /> 
+                                            : <Vendedor/>
 
 		return (
 			<div>
 			<Header> 
-				<p>Logo</p>
-				<div>
+				<img src={Logo}/>
+        {this.state.pagina && <ContainerPesquisar>
 					<Input 	onChange={this.onChangeValorPesquisa}
 							value={this.state.pesquisa}/>
-					<button onClick={this.onClickPesquisar}>Pesquisar</button>
-					<button onClick={this.mudarPagina}> 4Used Vendas</button>
-				</div>
+					<Procurar onClick={this.onClickPesquisar}>
+            <img src={Lupa}/>
+          </Procurar>
+				</ContainerPesquisar>}
+        {this.state.pagina ? 
+        <button onClick={this.mudarPagina}> 4Used Vendas</button> :
+        <button onClick={this.mudarPagina}> 4Used Clientes</button>}
 			</Header>
 			{pagina}
+      <Footer>
+        <div>
+          <h3>Quem Somos</h3>
+          <Descricao>4USED é uma plataforma para venda de produtos usados,
+          em que podem ser colocados artigos de decoração, calçados, 
+          eletrônicos e imóveis. A idéoa é se diferenciar pela sua
+          praticidade, e jeito fácil de descomplicar tudo em um site
+          de marketplace!</Descricao>
+        </div>
+        <Lema><i>OLD <br/>IS<br/> COOL</i></Lema>
+        <div>
+          <h3>Nossas Redes Sociais</h3>
+          <img src={RedesSociais}/>
+          <h3>Baixe o App</h3>
+          <img src={DownloadApp}/>
+        </div>
+      </Footer>
 			</div>
 		)
 	}
